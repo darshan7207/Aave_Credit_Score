@@ -25,7 +25,7 @@ wallet_scores.csv + score_distribution.png
 
 ## How to Run
 ```bash
-python score_wallets.py user_transactions.json
+python score_wallets.py user_wallet_transactions.json
 ```
 
 ## Scoring Logic
