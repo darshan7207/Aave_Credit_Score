@@ -1,0 +1,21 @@
+Assignment 2: Wallet Risk Scoring From Scratch
+
+Data Collection:
+Wallet transaction history was fetched using The Graph’s Compound V2 subgraph (harsh-eth/compound-v2-ethereum).
+Actions fetched included borrow, repay, deposit, redeem, and liquidationcall. These were retrieved for 100 wallets provided in the assignment.
+
+Feature Engineering:
+For each wallet, the following features were calculated:
+- tx_count: Total transactions
+- borrow_count, repay_count, deposit_count, liquidation_count, redeem_count
+- repay_ratio: repay_count / (borrow_count + 1)
+- deposit_ratio: deposit_count / (tx_count + 1)
+- liquidation_ratio: liquidation_count / (tx_count + 1)
+
+Scoring Logic:
+Final score = repay_ratio * 400 + deposit_ratio * 300 + (1 - liquidation_ratio) * 200 + min(tx_count, 50) * 2
+All scores were clipped to the range [0, 1000].
+
+Deliverables:
+- wallet_scores.csv: CSV with wallet_id and their calculated risk scores
+- explanation.txt: This description of data collection, feature design, and scoring rationale
